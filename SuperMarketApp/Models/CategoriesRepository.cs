@@ -36,8 +36,8 @@
         public static void UpdateCategory(int categoryId, Category category)
         {
             if (categoryId != category.CategoryId) return;
-            var updateToCategory = GetCategoryById(categoryId);
-            if(updateToCategory != null)
+            var updateToCategory = _categories.FirstOrDefault(c => c.CategoryId == categoryId);
+            if (updateToCategory != null)
             {
                 updateToCategory.Name = category.Name;
                 updateToCategory.Description = category.Description;
