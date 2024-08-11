@@ -16,6 +16,10 @@
                 var maxId = _categories.Max(c => c.CategoryId);
                 category.CategoryId = maxId + 1;
             }
+            else
+            {
+                category.CategoryId = 1;
+            }
             if (_categories == null)
             {
                 _categories = new List<Category>();
