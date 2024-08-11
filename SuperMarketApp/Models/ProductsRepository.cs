@@ -12,9 +12,21 @@
 
         public static void AddProduct(Product product)
         {
-            var maxId = _products.Max(x => x.ProductId);
-            product.ProductId = maxId + 1;
+            if (_products != null && _products.Count()>0)
+            {
+                var maxId = _products.Max(x => x.ProductId);
+                product.ProductId = maxId + 1;
+            }
+            else
+            {
+                product.ProductId = 1;
+            }
+
+            if(_products==null) 
+                _products = new List<Product>();
+
             _products.Add(product);
+
         }
 
         public static List<Product> GetProducts(bool loadCatetory)

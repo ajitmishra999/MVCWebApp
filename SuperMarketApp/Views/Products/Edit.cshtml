@@ -1,0 +1,11 @@
+﻿@model ProductViewModel;
+
+@section title {
+
+    @if (Model != null)
+    {
+        <h1> Edit Product : @Model.product?.Name </h1>
+    }
+}
+
+<partial name="_Product" model="@Model" />

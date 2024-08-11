@@ -27,7 +27,8 @@ namespace SuperMarketApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-           return View(category);
+            ViewBag.Action = "edit";
+            return View(category);
         }
 
         public IActionResult Add()
@@ -45,6 +46,7 @@ namespace SuperMarketApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            ViewBag.Action = "add";
             return View(category);
         }
 

@@ -13,6 +13,7 @@ namespace SuperMarketApp.Controllers
         }
         public IActionResult Add()
         {
+            ViewBag.Action = "add";
             var productViewModel = bindProductCategories();
             return View(productViewModel);
         }
@@ -25,6 +26,7 @@ namespace SuperMarketApp.Controllers
                 ProductsRepository.AddProduct(productViewModel.product);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Action = "add";
             productViewModel = bindProductCategories();
             return View(productViewModel);
         }
@@ -37,6 +39,36 @@ namespace SuperMarketApp.Controllers
             };
 
             return productViewModel;
+        }
+
+        public IActionResult Edit(int id)
+        {
+            ViewBag.Action = "edit";
+            var productViewModel = new ProductViewModel()
+            {
+                product = ProductsRepository.GetProductById(id, false) ?? new Product(),
+                categories = CategoriesRepository.GetCategories()
+            };
+            return View(productViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ProductViewModel productViewModel)
+        {
+            if(ModelState.IsValid)
+            {
+                ProductsRepository.UpdateProduct(productViewModel.product.ProductId, productViewModel.product);
+                return RedirectToAction(nameof(Index));
+            }
+            ViewBag.Action = "edit";
+            productViewModel = bindProductCategories();
+            return View(productViewModel);
+        }
+
+        public IActionResult Delete(int id)
+        {
+           ProductsRepository.DeleteProduct(id);
+           return RedirectToAction(nameof(Index));
         }
     }
 }
