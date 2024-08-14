@@ -70,5 +70,12 @@ namespace SuperMarketApp.Controllers
            ProductsRepository.DeleteProduct(id);
            return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult GetProductListByCategoryId(int categoryId)
+        {
+            var products = ProductsRepository.GetProductsByCategoryId(categoryId);
+
+            return PartialView("_products", products);
+        }
     }
 }
